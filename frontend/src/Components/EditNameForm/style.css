@@ -1,0 +1,22 @@
+.new-name-form {
+    width: 40%;
+    margin: auto;
+}
+.new-name-form .input-group {
+    display: flex;
+    margin: 0 auto;
+    column-gap: 0.5rem;
+}
+.new-name-form .input-group.input-center {
+    width: 10rem;
+}
+.input-new-names.input-error {
+    margin-right: auto;
+    margin-left: auto;
+}
+.input-group .input-wrapper {
+    width: 50%;
+}
+.input-group .edit-button {
+    width: 5rem;
+}
