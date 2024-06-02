@@ -7,7 +7,7 @@ import EditNameForm from "../../Components/EditNameForm/EditNameForm";
 import { fetchOrUpdateAccount } from "../../store/account";
 import { fetchOrUpdateUser } from "../../store/user";
 
-// import { getWithExpiry } from "../../utils/withExpiry";
+import { getWithExpiry } from "../../utils/withExpiry";
 
 import {
     selectBaseURL,
@@ -29,7 +29,7 @@ function Profile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // const localUserToken = getWithExpiry("userToken");
+    const localUserToken = getWithExpiry("userToken");
 
     const baseURL = useSelector(selectBaseURL());
     const isConnected = useSelector(selectIsConnected());
@@ -64,9 +64,7 @@ function Profile() {
         }
     }, [isConnected, localUserToken, navigate]);
 
-    /* It's checking if the userError state is not null or if the accountError state is not null. If the
-userError state is not null or the accountError state is not null, it returns a component that
-displays an error message. */
+
     if (userError !== null || accountError !== null) {
         return (
             <main className="main bg-dark">
@@ -80,9 +78,6 @@ displays an error message. */
         );
     }
 
-    /* It's checking if the userStatus state is not resolved or if the accountStatus state is not resolved.
-If the userStatus state is not resolved or the accountStatus state is not resolved, it returns a
-component that displays a loading message. */
     if (userStatus !== "resolved" || accountStatus !== "resolved") {
         return (
             <main className="main bg-dark">
@@ -93,9 +88,6 @@ component that displays a loading message. */
         );
     }
 
-    /* It's checking if the userStatus state is rejected or if the accountStatus state is rejected. If the
-userStatus state is rejected or the accountStatus state is rejected, it returns a component that
-displays a message. */
     if (userStatus === "rejected" || accountStatus === "rejected") {
         return (
             <main className="main bg-dark">

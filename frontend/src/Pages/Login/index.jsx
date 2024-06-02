@@ -5,7 +5,7 @@ import { fetchOrUpdateLogin } from "../../store/login";
 
 import { selectLoginError, selectIsConnected, selectBaseURL } from "../../store/selectors";
 
-// import { getWithExpiry } from "../../utils/withExpiry";
+import { getWithExpiry } from "../../utils/withExpiry";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,7 +14,7 @@ function Login() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// const localUserToken = getWithExpiry("userToken");
+	const localUserToken = getWithExpiry("userToken");
 	const localUserEmail = localStorage.getItem("userEmail");
 
 	const baseURL = useSelector(selectBaseURL());
