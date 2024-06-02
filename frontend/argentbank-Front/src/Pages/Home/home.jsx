@@ -1,4 +1,4 @@
-import HomeFeature from "../../components/HomeFeature";
+import HomeFeature from "../../Components/HomeFeatures/HomeFeature";
 
 import iconChat from "../../assets/icon-chat.png";
 import iconMoney from "../../assets/icon-money.png";
