@@ -44,34 +44,31 @@ function Profile() {
     const accountData = useSelector(selectUserAccountData(userId));
 
     useEffect(() => {
-        /* It's checking if the localUserToken is not null and if the userToken is null. If the
-        localUserToken is not null and the userToken is null, it dispatches the fetchOrUpdateUser action. */
+        // Vérifie si le localUserToken n'est pas null et si le userToken est null. Si oui, déclenche fetchOrUpdateUser.
         if (localUserToken && !userToken) {
             dispatch(fetchOrUpdateUser(baseURL, localUserToken));
         }
     }, [localUserToken, userToken, dispatch, baseURL]);
 
     useEffect(() => {
-        /* It's dispatching the fetchOrUpdateAccount action. */
+        // Déclenche fetchOrUpdateAccount.
         dispatch(fetchOrUpdateAccount);
     }, [dispatch]);
 
     useEffect(() => {
-        /* It's checking if the isConnected state is false and if the localUserToken is null. If the
-        isConnected state is false and the localUserToken is null, it redirects to the login page. */
+        // Redirige vers la page de connexion si l'utilisateur n'est pas connecté et que le localUserToken est null.
         if (!isConnected && !localUserToken) {
             navigate("/login");
         }
     }, [isConnected, localUserToken, navigate]);
 
-
     if (userError !== null || accountError !== null) {
         return (
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Error... </h1>
+                    <h1>Erreur... </h1>
                     <h2>
-                        {userError && "User data: " + userError.response.statusText} {accountError && "Account data: " + accountError.response.statusText}
+                        {userError && "Données utilisateur : " + userError.response.statusText} {accountError && "Données du compte : " + accountError.response.statusText}
                     </h2>
                 </div>
             </main>
@@ -82,7 +79,7 @@ function Profile() {
         return (
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Loading...</h1>
+                    <h1>Chargement...</h1>
                 </div>
             </main>
         );
@@ -92,7 +89,7 @@ function Profile() {
         return (
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Your request is rejected</h1>
+                    <h1>Votre demande est rejetée</h1>
                 </div>
             </main>
         );
@@ -102,13 +99,13 @@ function Profile() {
         <main className="main bg-dark">
             <div className="header">
                 <h1>
-                    Welcome back
+                    Bon retour
                     <br />
                     {userFirstName && userFirstName} {userLastName && userLastName}!
                 </h1>
                 <EditNameForm />
             </div>
-            <h2 className="sr-only">Accounts</h2>
+            <h2 className="sr-only">Comptes</h2>
             {accountData && accountData.account.map((account, index) => <AccountCard key={account.title + "-" + index} title={account.title} amount={account.amount} description={account.description} />)}
         </main>
     );

@@ -4,5 +4,5 @@ const initialState = {
     baseURL: "http://localhost:3001/api/v1",
 };
 
-/* Create api reducer. */
+/* Création du reducer */
 export default createReducer(initialState, (builder) => builder);

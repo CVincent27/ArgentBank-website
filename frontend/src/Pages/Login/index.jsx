@@ -26,10 +26,7 @@ function Login() {
 	const [rememberMe, setRememberMe] = useState(false);
 
 	/**
-	 * When the user clicks the submit button, prevent the default action, then if the user has checked
-	 * the remember me box, save the user's email to local storage, otherwise remove the user's email from
-	 * local storage, then dispatch the fetchOrUpdateLogin function with the baseURL, email, and password
-	 * as arguments.
+	 * Soumission form: sauvegarde ou supprime l'email selon la case cochée et envoie la requête de connexion.
 	 */
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -38,21 +35,18 @@ function Login() {
 	};
 
 	/**
-	 * When the user clicks the checkbox, the value of the checkbox is set to the opposite of what it was
-	 * before.
+	 * gestion clic sur la case RememberMe.
 	 */
 	const handleRememberMe = () => {
 		setRememberMe(!rememberMe);
 	};
 
 	useEffect(() => {
-		/* This is checking if the user is logged in. If the user is logged in, it redirects to the profile
-		page. */
+		/* Redirige vers /profile si l'utilisateur est connecté. */
 		if (localUserToken || (isConnected && loginError === null)) {
 			navigate("/profile");
 		}
-		/* This is checking if the user has checked the remember me box. If the user has checked the remember
-		me box, it sets the email input to the user's email. */
+		/* Rempli auto l'email si RememberMe est coché */
 		if (localUserEmail) {
 			setRememberMe(true);
 			setEmail(localUserEmail);
@@ -63,23 +57,23 @@ function Login() {
 		<main className="main bg-dark">
 			<section className="sign-in-content">
 				<i className="fa fa-user-circle sign-in-icon"></i>
-				<h1>Sign In</h1>
+				<h1>Se connecter</h1>
 				<form onSubmit={handleSubmit}>
 					<div className="input-wrapper">
-						<label htmlFor="username">Username</label>
+						<label htmlFor="username">Nom d'utilisateur</label>
 						<input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
 					</div>
 					<div className="input-wrapper">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password">Mot de passe</label>
 						<input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
 					</div>
 					<div className="input-remember">
 						<input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
-						<label htmlFor="remember-me">Remember me</label>
+						<label htmlFor="remember-me">Se souvenir de moi</label>
 					</div>
 
 					<button type="submit" className="sign-in-button">
-						Sign In
+						Se connecter
 					</button>
 					{loginError && <div className="input-remember input-error">{loginError.response.data.message}</div>}
 				</form>

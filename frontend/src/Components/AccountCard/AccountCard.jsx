@@ -16,17 +16,8 @@ function AccountCard({ title, amount, description }) {
 }
 
 AccountCard.propTypes = {
-	/**
-	 * Title string (required) to be displayed in the card
-	 */
 	title: PropTypes.string.isRequired,
-	/**
-	 * Number of the amount (required) to be displayed in the card
-	 */
 	amount: PropTypes.number.isRequired,
-	/**
-	 * Description string (required) to be displayed in the card
-	 */
 	description: PropTypes.string.isRequired,
 };
 

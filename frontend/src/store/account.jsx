@@ -12,12 +12,11 @@ const accountResolvedAction = createAction("account/resolved");
 const accountRejectedAction = createAction("account/rejected");
 
 /**
- * Function to fetch or update Account data.
- * @returns the result of the dispatch function.
+ * Fonction pour récupérer ou mettre à jour les données de compte. (return result de disptatch)
  */
 export const fetchOrUpdateAccount = async (dispatch, getState) => {
     /**
-     * If the status of the account is pending or updating, then return.
+     * Si le statut du compte est pending ou updating, retourner.
      */
     const selectAccount = (state) => state.account;
     const status = selectAccount(getState()).status;
@@ -26,7 +25,7 @@ export const fetchOrUpdateAccount = async (dispatch, getState) => {
     }
 
     dispatch(accountFetchingAction());
-    /* Fetching the account data. */
+    /* Récupération data du compte */
     await axios
         .get(window.location.origin + "/account-data.json")
         .then((response) => {
@@ -37,7 +36,7 @@ export const fetchOrUpdateAccount = async (dispatch, getState) => {
         });
 };
 
-/* Create account reducer. */
+/* Création du reducer */
 export default createReducer(initialState, (builder) =>
     builder
         .addCase(accountFetchingAction, (draft) => {

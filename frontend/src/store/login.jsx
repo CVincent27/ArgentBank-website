@@ -47,7 +47,7 @@ export const fetchOrUpdateLogin = (baseURL, email, password) => {
     };
 };
 
-/* Create login reducer. */
+/* Création du reducer login */
 export default createReducer(initialState, (builder) =>
     builder
         .addCase(loginFetchingAction, (draft) => {

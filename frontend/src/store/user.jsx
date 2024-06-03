@@ -23,15 +23,12 @@ export const userTokenAction = createAction("user/token");
 export const userResetAction = createAction("user/reset");
 
 /**
- * Function to check userToken and store more userData.
- * @param {String} baseURL - URL of the API.
- * @param {String} token - Token for user authentification.
- * @returns A function that takes dispatch and getState as arguments.
+ * Verif userToken et stocker les userData.
  */
 export const fetchOrUpdateUser = (baseURL, token) => {
 	return async (dispatch, getState) => {
 		/**
-		 * If the status of the user is pending or updating, then return.
+		 * Si le statut de l'utilisateur est pending ou updating on return.
 		 */
 		const selectUser = (state) => state.user;
 		const status = selectUser(getState()).status;
@@ -40,7 +37,7 @@ export const fetchOrUpdateUser = (baseURL, token) => {
 		}
 
 		dispatch(userFetchingAction());
-		/* Making a post request to the server to get more userData. */
+		/* Requête POST pour obtenir les userData. */
 		await axios({
 			method: "POST",
 			url: baseURL + "/user/profile",
@@ -57,18 +54,10 @@ export const fetchOrUpdateUser = (baseURL, token) => {
 	};
 };
 
-/**
- * Function to check userToken and modify user firstname and lastname.
- * @param {String} baseURL - URL of the API.
- * @param {String} token - Token for user authentification.
- * @param {String} firstname - New firstname of the user.
- * @param {String} lastname - New lastname of the user.
- * @returns A function that takes dispatch and getState as arguments.
- */
 export const modifyUserName = (baseURL, token, firstname, lastname) => {
 	return async (dispatch, getState) => {
 		/**
-		 * If the status of the user is pending or updating, then return.
+		 * Si le statut de l'utilisateur est pending ou updating on return.
 		 */
 		const selectUser = (state) => state.user;
 		const status = selectUser(getState()).status;
@@ -77,7 +66,7 @@ export const modifyUserName = (baseURL, token, firstname, lastname) => {
 		}
 
 		dispatch(userFetchingAction());
-		/* Making a put request to the server to edit firstname and lastname */
+		/* Requête PUT pour modifier firstname et lastname */
 		axios({
 			method: "PUT",
 			url: baseURL + "/user/profile",
@@ -96,7 +85,7 @@ export const modifyUserName = (baseURL, token, firstname, lastname) => {
 	};
 };
 
-/* Create user reducer. */
+/* Création du reducer user */
 export default createReducer(initialState, (builder) =>
 	builder
 		.addCase(userFetchingAction, (draft) => {
@@ -113,7 +102,6 @@ export default createReducer(initialState, (builder) =>
 				draft.status = "updating";
 				return;
 			}
-			return;
 		})
 		.addCase(userResolvedAction, (draft, action) => {
 			if (draft.status === "pending" || draft.status === "updating") {
@@ -124,46 +112,23 @@ export default createReducer(initialState, (builder) =>
 				draft.createdAt = action.payload.body.createdAt;
 				draft.updatedAt = action.payload.body.updatedAt;
 				draft.status = "resolved";
-				return;
 			}
-			return;
 		})
 		.addCase(userRejectedAction, (draft, action) => {
 			if (draft.status === "pending" || draft.status === "updating") {
 				draft.status = "rejected";
 				draft.error = action.payload;
-				draft.isConnected = initialState.isConnected;
-				draft.token = initialState.token;
-				draft.id = initialState.id;
-				draft.email = initialState.email;
-				draft.firstName = initialState.firstName;
-				draft.lastName = initialState.lastName;
-				draft.createdAt = initialState.createdAt;
-				draft.updatedAt = initialState.updatedAt;
-				return;
+				Object.assign(draft, initialState);
 			}
-			return;
 		})
 		.addCase(isConnectedAction, (draft, action) => {
 			draft.isConnected = action.payload;
-			return;
 		})
 		.addCase(userTokenAction, (draft, action) => {
 			draft.token = action.payload;
-			return;
 		})
 		.addCase(userResetAction, (draft) => {
-			draft.status = initialState.status;
-			draft.error = initialState.error;
-			draft.isConnected = initialState.isConnected;
-			draft.token = initialState.token;
-			draft.id = initialState.id;
-			draft.email = initialState.email;
-			draft.firstName = initialState.firstName;
-			draft.lastName = initialState.lastName;
-			draft.createdAt = initialState.createdAt;
-			draft.updatedAt = initialState.updatedAt;
+			Object.assign(draft, initialState);
 			localStorage.removeItem("userToken");
-			return;
 		})
 );
