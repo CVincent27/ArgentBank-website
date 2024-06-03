@@ -44,7 +44,7 @@ function Profile() {
     const accountData = useSelector(selectUserAccountData(userId));
 
     useEffect(() => {
-        // Vérifie si le localUserToken n'est pas null et si le userToken est null. Si oui, déclenche fetchOrUpdateUser.
+        // Vérifie si le localUserToken n'est pas null et si le userToken = null. si oui déclenche fetchOrUpdateUser.
         if (localUserToken && !userToken) {
             dispatch(fetchOrUpdateUser(baseURL, localUserToken));
         }

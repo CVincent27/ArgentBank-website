@@ -3,7 +3,7 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 
 import { userTokenAction, isConnectedAction, fetchOrUpdateUser } from "./user";
 
-// import { setWithExpiry } from "../utils/withExpiry";
+import { setWithExpiry } from "../utils/withExpiry";
 
 const initialState = {
     status: "void",
@@ -37,7 +37,7 @@ export const fetchOrUpdateLogin = (baseURL, email, password) => {
                 dispatch(loginResolvedAction(response.data));
                 dispatch(fetchOrUpdateUser(baseURL, response.data.body.token));
                 dispatch(userTokenAction(response.data.body.token));
-                // setWithExpiry("userToken", response.data.body.token, 1000 * 60 * 60); //ms * sec * min
+                setWithExpiry("userToken", response.data.body.token, 1000 * 60 * 60); //ms * sec * min
                 dispatch(isConnectedAction(true));
             })
             .catch((error) => {

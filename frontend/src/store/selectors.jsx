@@ -55,5 +55,13 @@ export const selectAccountError = () => {
 };
 
 export const selectUserAccountData = (id) => {
-	return (state) => (state.account.data ? state.account.data.find((item) => item.userId === id) : null);
+	return (state) => {
+		const userData = state.account.data;
+		if (!userData || !Array.isArray(userData)) {
+			return null;
+		}
+		return userData.find((item) => item.userId === id);
+	};
 };
+
+
