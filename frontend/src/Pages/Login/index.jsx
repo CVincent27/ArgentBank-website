@@ -54,30 +54,32 @@ function Login() {
 	}, [localUserToken, isConnected, loginError, dispatch, navigate, localUserEmail, setEmail]);
 
 	return (
-		<main className="main bg-dark">
-			<section className="sign-in-content">
-				<i className="fa fa-user-circle sign-in-icon"></i>
-				<h1>Se connecter</h1>
-				<form onSubmit={handleSubmit}>
-					<div className="input-wrapper">
-						<label htmlFor="username">Nom d'utilisateur</label>
-						<input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
-					</div>
-					<div className="input-wrapper">
-						<label htmlFor="password">Mot de passe</label>
-						<input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
-					</div>
-					<div className="input-remember">
-						<input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
-						<label htmlFor="remember-me">Se souvenir de moi</label>
-					</div>
+		<main>
+			<div className="main bg-dark">
+				<section className="sign-in-content">
+					<i className="fa fa-user-circle sign-in-icon"></i>
+					<h1>Se connecter</h1>
+					<form onSubmit={handleSubmit}>
+						<div className="input-wrapper">
+							<label htmlFor="username">Nom d'utilisateur</label>
+							<input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
+						</div>
+						<div className="input-wrapper">
+							<label htmlFor="password">Mot de passe</label>
+							<input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+						</div>
+						<div className="input-remember">
+							<input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
+							<label htmlFor="remember-me">Se souvenir de moi</label>
+						</div>
 
-					<button type="submit" className="sign-in-button">
-						Se connecter
-					</button>
-					{loginError && <div className="input-remember input-error">{loginError.response.data.message}</div>}
-				</form>
-			</section>
+						<button type="submit" className="sign-in-button">
+							Se connecter
+						</button>
+						{loginError && <div className="input-remember input-error">{loginError.response.data.message}</div>}
+					</form>
+				</section>
+			</div>
 		</main>
 	);
 }

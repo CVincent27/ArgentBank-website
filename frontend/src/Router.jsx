@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./Components/Header/Header";
-// import Footer from "./Components/Footer";
+import Footer from "./Components/Footer/Footer";
 
 import Home from "./Pages/Home/home";
 import Login from "./Pages/Login";
@@ -18,7 +18,7 @@ function Router() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/profile" element={<Profile />} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </React.StrictMode>
   );
