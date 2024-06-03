@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
 // import Footer from "./Components/Footer";
 
 import Home from "./Pages/Home/home";
@@ -12,7 +12,7 @@ function Router() {
   return (
     <React.StrictMode>
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
