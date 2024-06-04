@@ -40,7 +40,7 @@ function Header() {
                 {userFirstName && (
                     <NavLink onClick={signOut} className="main-nav-item" to="/">
                         <i className="fa fa-sign-out"></i>
-                        Se déconnecter
+                        Sign Out
                     </NavLink>
                 )}
         </nav>

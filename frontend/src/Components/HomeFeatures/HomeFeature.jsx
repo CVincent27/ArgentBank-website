@@ -11,17 +11,8 @@ function HomeFeature({ img, title, text }) {
 }
 
 HomeFeature.propTypes = {
-	/**
-	 * Image string (required) to be displayed
-	 */
 	img: PropTypes.string.isRequired,
-	/**
-	 * Title (required) to be displayed
-	 */
 	title: PropTypes.string.isRequired,
-	/**
-	 * Text string (required) to be displayed
-	 */
 	text: PropTypes.string.isRequired,
 };
 

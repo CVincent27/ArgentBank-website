@@ -25,28 +25,25 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
 
-	/**
-	 * Soumission form: sauvegarde ou supprime l'email selon la case cochée et envoie la requête de connexion.
-	 */
+
+	//  Soumission form: sauvegarde ou supprime l'email selon la case cochée et envoie la requête de connexion.
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		rememberMe ? localStorage.setItem("userEmail", email) : localStorage.removeItem("userEmail");
 		dispatch(fetchOrUpdateLogin(baseURL, email, password));
 	};
 
-	/**
-	 * gestion clic sur la case RememberMe.
-	 */
+	// gestion clic sur la case RememberMe.
 	const handleRememberMe = () => {
 		setRememberMe(!rememberMe);
 	};
 
 	useEffect(() => {
-		/* Redirige vers /profile si l'utilisateur est connecté. */
+		// Redirige vers /profile si l'utilisateur est connecté.
 		if (localUserToken || (isConnected && loginError === null)) {
 			navigate("/profile");
 		}
-		/* Rempli auto l'email si RememberMe est coché */
+		// Rempli auto l'email si RememberMe est coché 
 		if (localUserEmail) {
 			setRememberMe(true);
 			setEmail(localUserEmail);

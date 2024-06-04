@@ -23,32 +23,30 @@ function EditNameForm() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		/* It's checking if the new first name and new last name are the same as the user first name and user
-		last name. If they are the same, it sets the error message to "There are no change". */
+		// check si nom / prénoms ont changés
 		if (newFirstName === userFirstName && newLastName === userLastName) {
 			setEditNameFormError("FirstName and LastName are the same as the current ones.");
-		} /* It's checking if the new first name and new last name are empty. If they are empty, it sets the
-		error message to "Inputs can't be empty". */ else if (newFirstName.length === 0 || newLastName.length === 0) {
+		}
+		// check si nom / prénoms sont vides
+		else if (newFirstName.length === 0 || newLastName.length === 0) {
 			setEditNameFormError("Inputs can't be empty");
-		} /* It's checking if the new first name and new last name are not empty. If they are not empty, it
-		dispatches the modifyUserName action and it sets the showEditNameForm state to false and the
-		editNameFormError state to an empty string. */ else if (newFirstName.length > 0 && newLastName.length > 0) {
+		}
+		// check si nom / prénoms sont trop longs
+		else if (newFirstName.length > 0 && newLastName.length > 0) {
 			dispatch(modifyUserName(baseURL, userToken, newFirstName, newLastName));
 			setShowEditNameForm(false);
 			setEditNameFormError("");
 		}
 	};
 
-	/**
-	 * If showEditNameForm is true, set showEditNameForm to false, otherwise set showEditNameForm to true.
-	 */
+
+	// defini état showEditNameForm (quand cliqué)
 	const toggleEditNameForm = () => {
 		showEditNameForm ? setShowEditNameForm(false) : setShowEditNameForm(true);
 	};
 
 	useEffect(() => {
-		/* It's setting the newFirstName state to the userFirstName and the newLastName state to the
-		userLastName. */
+		// set les nouveaux prénoms et noms
 		setNewFirstName(userFirstName);
 		setNewLastName(userLastName);
 	}, [userFirstName, userLastName]);

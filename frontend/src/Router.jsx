@@ -5,8 +5,8 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 
 import Home from "./Pages/Home/home";
-import Login from "./Pages/Login";
-import Profile from "./Pages/Profile";
+import Login from "./Pages/Login/login";
+import Profile from "./Pages/Profile/profile";
 
 function Router() {
   return (
