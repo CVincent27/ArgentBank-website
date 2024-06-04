@@ -1,4 +1,4 @@
-// import "./SignInForm.scss"
+// import "./SignInForm.css"
 
 function SignInForm() {
   return (
