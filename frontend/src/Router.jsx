@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Home from "./Pages/Home/home";
 import User from "./Pages/User/User";
-import Header from "./Components/Header/Header";
+import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Login from "./Pages/Login/login"
 
@@ -12,7 +12,7 @@ export default function Router() {
 
   return (
     <div>
-      <Header />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user" element={<User />} />
