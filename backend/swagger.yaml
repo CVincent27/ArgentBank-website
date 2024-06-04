@@ -65,8 +65,8 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
+      produces:
+       - application/json
       responses:
         '200':
           description: User profile retrieved successully

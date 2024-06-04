@@ -1,82 +1,26 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { fetchOrUpdateLogin } from "../../store/login";
-
-import { selectLoginError, selectIsConnected, selectBaseURL } from "../../store/selectors";
-
-import { getWithExpiry } from "../../utils/withExpiry";
-
-import { useDispatch, useSelector } from "react-redux";
-
+import Header from '../../Components/Header/Header';
+import Account from '../../Components/Account/Account';
 
 function Login() {
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
-
-	const localUserToken = getWithExpiry("userToken");
-	const localUserEmail = localStorage.getItem("userEmail");
-
-	const baseURL = useSelector(selectBaseURL());
-	const loginError = useSelector(selectLoginError());
-	const isConnected = useSelector(selectIsConnected());
-
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [rememberMe, setRememberMe] = useState(false);
-
-
-	//  Soumission form: sauvegarde ou supprime l'email selon la case cochée et envoie la requête de connexion.
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		rememberMe ? localStorage.setItem("userEmail", email) : localStorage.removeItem("userEmail");
-		dispatch(fetchOrUpdateLogin(baseURL, email, password));
-	};
-
-	// gestion clic sur la case RememberMe.
-	const handleRememberMe = () => {
-		setRememberMe(!rememberMe);
-	};
-
-	useEffect(() => {
-		// Redirige vers /profile si l'utilisateur est connecté.
-		if (localUserToken || (isConnected && loginError === null)) {
-			navigate("/profile");
-		}
-		// Rempli auto l'email si RememberMe est coché 
-		if (localUserEmail) {
-			setRememberMe(true);
-			setEmail(localUserEmail);
-		}
-	}, [localUserToken, isConnected, loginError, dispatch, navigate, localUserEmail, setEmail]);
-
 	return (
-		<main>
-			<div className="main bg-dark">
-				<section className="sign-in-content">
-					<i className="fa fa-user-circle sign-in-icon"></i>
-					<h1>Sign in</h1>
-					<form onSubmit={handleSubmit}>
-						<div className="input-wrapper">
-							<label htmlFor="username">Username</label>
-							<input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
-						</div>
-						<div className="input-wrapper">
-							<label htmlFor="password">Password</label>
-							<input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
-						</div>
-						<div className="input-remember">
-							<input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
-							<label htmlFor="remember-me">Remember me</label>
-						</div>
-
-						<button type="submit" className="sign-in-button">
-							Sign in
-						</button>
-						{loginError && <div className="input-remember input-error">{loginError.response.data.message}</div>}
-					</form>
-				</section>
-			</div>
+		<main className="main bg-dark">
+			<Header />
+			<h2 className="sr-only">Accounts</h2>
+			<Account
+				title="Argent Bank Checking (x8349)"
+				amount="$2,082.79"
+				description="Available Balance"
+			/>
+			<Account
+				title="Argent Bank Savings (x6712)"
+				amount="$10,928.42"
+				description="Available Balance"
+			/>
+			<Account
+				title="Argent Bank Credit Card (x8349)"
+				amount="$184.30"
+				description="Current Balance"
+			/>
 		</main>
 	);
 }
