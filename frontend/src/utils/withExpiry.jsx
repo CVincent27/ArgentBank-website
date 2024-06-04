@@ -1,6 +1,5 @@
 export const setWithExpiry = (key, value, TTL) => {
 	const now = new Date();
-	/* Création d'un objet avec value et expiry. */
 	const item = {
 		value: value,
 		/* Ajout du TTL au temps actuel pour obtenir l'heure d'expiration. */
@@ -11,7 +10,7 @@ export const setWithExpiry = (key, value, TTL) => {
 };
 
 
-// Récupère la valeur de la clé dans localStorage, vérifie si l'heure actuelle est supérieure à l'heure d'expiration pour supp ou non l'élément de localStorage.
+// Récupère la valeur de la clé dans localStorage, vérifie si l'heure actuelle est > à l'heure d'expiration pour supp ou non l'élément de localStorage.
 
 export const getWithExpiry = (key) => {
 	/* Récupération valeur de la key dans localStorage. */

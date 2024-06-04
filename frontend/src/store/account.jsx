@@ -11,13 +11,13 @@ const accountFetchingAction = createAction("account/fetching");
 const accountResolvedAction = createAction("account/resolved");
 const accountRejectedAction = createAction("account/rejected");
 
-/**
- * Fonction pour récupérer ou mettre à jour les données de compte. (return result de disptatch)
- */
+
+// Fonction pour récupérer ou mettre à jour les données de compte. (return result de disptatch)
+
 export const fetchOrUpdateAccount = async (dispatch, getState) => {
-    /**
-     * Si le statut du compte est pending ou updating, retourner.
-     */
+
+    //  Si le statut du compte est pending ou updating, retourner.
+
     const selectAccount = (state) => state.account;
     const status = selectAccount(getState()).status;
     if (status === "pending" || status === "updating") {

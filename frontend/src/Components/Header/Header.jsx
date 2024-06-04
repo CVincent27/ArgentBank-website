@@ -4,6 +4,7 @@ import { userResetAction } from "../../store/user";
 import { selectUserFirstName } from "../../store/selectors";
 import { useDispatch, useSelector } from "react-redux";
 
+
 function Header() {
     const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ function Header() {
                 {!userFirstName && (
                     <NavLink className="main-nav-item" to="/login">
                         <i className="fa fa-user-circle"></i>
-                        Se connecter
+                        Sign in
                     </NavLink>
                 )}
 
