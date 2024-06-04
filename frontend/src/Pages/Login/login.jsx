@@ -4,7 +4,6 @@ import Account from '../../Components/Account/Account';
 function Login() {
 	return (
 		<main className="main bg-dark">
-			<Header />
 			<h2 className="sr-only">Accounts</h2>
 			<Account
 				title="Argent Bank Checking (x8349)"
