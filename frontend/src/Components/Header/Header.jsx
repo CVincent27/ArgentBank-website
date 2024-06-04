@@ -10,7 +10,7 @@ function Header() {
 
     const userFirstName = useSelector(selectUserFirstName());
 
-    // au click sur le btn de deconnexion on appelle la func userResetAction 
+    // au click sur le btn de deco on appelle userResetAction 
     // qui réinitialise l'état de l'utilisateur à null.
     const signOut = () => {
         dispatch(userResetAction());
@@ -22,11 +22,11 @@ function Header() {
                 <img className="main-nav-logo-image" src={logo} alt="Logo Argent Bank" />
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
-            <div>
                 {!userFirstName && (
                     <NavLink className="main-nav-item" to="/login">
                         <i className="fa fa-user-circle"></i>
-                        Sign in
+                        <span> Sign In</span>
+                        
                     </NavLink>
                 )}
 
@@ -43,7 +43,6 @@ function Header() {
                         Se déconnecter
                     </NavLink>
                 )}
-            </div>
         </nav>
     );
 }

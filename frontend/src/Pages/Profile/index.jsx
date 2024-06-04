@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AccountCard from "../../Components/AccountCard/AccountCard";
+import Account from "../../Components/Account/Account";
 import EditNameForm from "../../Components/EditNameForm/EditNameForm";
 
 import { fetchOrUpdateAccount } from "../../store/account";
@@ -106,7 +106,7 @@ function Profile() {
                 <EditNameForm />
             </div>
             <h2 className="sr-only">Comptes</h2>
-            {accountData && accountData.account.map((account, index) => <AccountCard key={account.title + "-" + index} title={account.title} amount={account.amount} description={account.description} />)}
+            {accountData && accountData.account.map((account, index) => <Account key={account.title + "-" + index} title={account.title} amount={account.amount} description={account.description} />)}
         </main>
     );
 }
