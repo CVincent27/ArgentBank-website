@@ -1,4 +1,3 @@
-// import "./SignInContent.css"
 import SignInForm from '../SignInForm/SignInForm';
 
 function SignInContent() {

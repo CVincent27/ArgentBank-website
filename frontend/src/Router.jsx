@@ -6,7 +6,7 @@ import Footer from "./Components/Footer/Footer";
 
 import Home from "./Pages/Home/home";
 import Login from "./Pages/Login/login";
-import Profile from "./Pages/Profile/profile";
+import User from "./Pages/User/User";
 
 function Router() {
   return (
@@ -16,7 +16,7 @@ function Router() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile" element={<User />} />
         </Routes>
         <Footer />
       </BrowserRouter>
