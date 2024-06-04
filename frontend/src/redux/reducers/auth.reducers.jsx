@@ -18,7 +18,7 @@ export const authReducer = (state = initialState, action) => {
                 token: action.payload,
                 error: null
             }
-        
+
         case LOGIN_FAIL: {
             return {
                 ...state,
@@ -26,10 +26,10 @@ export const authReducer = (state = initialState, action) => {
                 isConnected: false,
                 error: action.payload
             }
-        }  
+        }
         case LOGOUT: {
             return initialState;
-        }  
+        }
         default:
             return state;
     }

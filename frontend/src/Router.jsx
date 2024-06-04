@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Home from "./Pages/Home/home";
 import User from "./Pages/User/User";
-import Navbar from "./Components/Header/Header";
+import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Login from "./Pages/Login/login"
 
@@ -12,7 +12,7 @@ export default function Router() {
 
   return (
     <div>
-      <Navbar />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user" element={<User />} />
@@ -20,7 +20,6 @@ export default function Router() {
           path="/login"
           element={isConnected ? <Login /> : <Navigate to="/user" />}
         />
-        <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
     </div>
