@@ -1,27 +1,28 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Home from "./Pages/Home/home";
-import Login from "./Pages/Login/login";
 import User from "./Pages/User/User";
+import Navbar from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
+import Login from "./Pages/Login/login"
 
-function Router() {
+export default function Router() {
+  const isConnected = useSelector((state) => state.auth.isConnected);
+
   return (
-    <React.StrictMode>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/profile" element={<User />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </React.StrictMode>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/user" element={<User />} />
+        <Route
+          path="/login"
+          element={isConnected ? <Login /> : <Navigate to="/user" />}
+        />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
-
-export default Router;

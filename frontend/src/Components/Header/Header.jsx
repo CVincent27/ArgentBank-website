@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsername } from '../../redux/actions/user.actions.jsx';
-import { isValidName } from "../../utils/regex.jsx";
+import { updateUsername } from '../../redux/actions/users.actions.jsx';
+import { isValidName } from "../../utils/Regex.jsx";
 
 function Header() {
-  const token = useSelector((state) => state.auth.token);
+    const token = useSelector((state) => state.auth.token);
     const userData = useSelector((state) => state.user.userData);
     /* Manages the appearance of the username modification form */
     const [display, setDisplay] = useState(true);
@@ -31,7 +31,7 @@ function Header() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({userName}),
+                body: JSON.stringify({ userName }),
             });
             if (response.ok) {
                 const data = await response.json();
@@ -50,18 +50,18 @@ function Header() {
             console.error(error);
         }
     }
-  return (
-    <div className="header">
-    { display ?
-    <div>
-      <h1>Welcome back<br />
-      {userData.username} {userData.lastname} 
-      </h1>
+    return (
+        <div className="header">
+            {display ?
+                <div>
+                    <h1>Welcome back<br />
+                        {userData.username} {userData.lastname}
+                    </h1>
 
-      <button className="edit-button"onClick={() => setDisplay(!display)}>Edit Name</button>
-    </div>
-    :
-    <div>
+                    <button className="edit-button" onClick={() => setDisplay(!display)}>Edit Name</button>
+                </div>
+                :
+                <div>
                     <h2>Edit user info</h2>
                     <form>
                         <div className="edit-input">
@@ -77,7 +77,7 @@ function Header() {
                             <label htmlFor="firstname">First name:</label>
                             <input
                                 type="text"
-                                id="firstname" 
+                                id="firstname"
                                 defaultValue={userData.firstname}
                                 disabled={true}
                             />
@@ -86,7 +86,7 @@ function Header() {
                             <label htmlFor="lastname">Last name:</label>
                             <input
                                 type="text"
-                                id="lastname" 
+                                id="lastname"
                                 defaultValue={userData.lastname}
                                 disabled={true}
                             />
