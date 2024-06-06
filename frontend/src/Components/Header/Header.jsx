@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUsername } from '../../redux/actions/users.actions.jsx';
 import { isValidName } from "../../utils/regex.jsx";
+import { updateUsernameService } from '../../redux/services/userService.jsx';
 
 function Header() {
     const token = useSelector((state) => state.auth.token);
@@ -25,28 +26,15 @@ function Header() {
             setErrorMessage("");
         }
         try {
-            const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ userName }),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const username = data.body.userName;
-
-                dispatch(updateUsername(username));
-                setDisplay(!display);
-            } else {
-                console.log("Champs invalides")
-            }
+            const username = await updateUsernameService(token, userName);
+            dispatch(updateUsername(username));
+            setDisplay(!display);
 
         } catch (error) {
             console.error(error);
         }
     }
+
     return (
         <div className="header">
             {display ?

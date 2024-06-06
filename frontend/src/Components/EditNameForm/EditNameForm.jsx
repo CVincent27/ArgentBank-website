@@ -19,7 +19,7 @@ function EditNameForm() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		// check si nom / prénoms ont changés
+		// check si nom / prénoms ont pas changés
 		if (newFirstName === userFirstName && newLastName === userLastName) {
 			setEditNameFormError("Le nom et le prénom n'ont pas changé");
 		}
@@ -33,12 +33,6 @@ function EditNameForm() {
 			setShowEditNameForm(false);
 			setEditNameFormError("");
 		}
-	};
-
-
-	// defini état showEditNameForm (quand cliqué)
-	const toggleEditNameForm = () => {
-		showEditNameForm ? setShowEditNameForm(false) : setShowEditNameForm(true);
 	};
 
 	useEffect(() => {

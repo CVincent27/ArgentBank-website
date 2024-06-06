@@ -168,6 +168,11 @@ body {
   color: #fff;
 }
 
+.connected{
+  display: flex;
+  gap: 5px;
+}
+
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
