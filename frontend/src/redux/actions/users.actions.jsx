@@ -1,6 +1,6 @@
 import { GET_USERPROFILE, EDIT_USERNAME } from "./type.actions";
 
-/* User data recovery action */
+// action recup data
 export const userProfile = (userData) => {
     return {
         type: GET_USERPROFILE,
@@ -8,7 +8,7 @@ export const userProfile = (userData) => {
     }
 }
 
-/* Username update action */
+// action update username
 export const updateUsername = (username) => {
     return {
         type: EDIT_USERNAME,

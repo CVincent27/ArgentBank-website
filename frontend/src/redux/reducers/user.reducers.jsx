@@ -1,6 +1,6 @@
 import { GET_USERPROFILE, EDIT_USERNAME, LOGOUT } from "../actions/type.actions"
 
-/* Initial user state */
+// état initial du user 
 const initialState = {
     status: 'VOID',
     userData: {}

@@ -15,13 +15,13 @@ function SignInForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    /* Handle error message */
+    // Gere les messages d'erreurs
     if (!isValidEmail(email)) {
-      setErrorMessage("Invalid email adress");
+      setErrorMessage("Adresse e-mail invalide");
       return;
     }
     if (!isValidPassword(password)) {
-      setErrorMessage("Invalid password");
+      setErrorMessage("Mot de passe invalide");
       return;
     }
     try {
@@ -34,10 +34,9 @@ function SignInForm() {
       });
       if (response.ok) {
         const data = await response.json();
-        /* 
-            Checking that the query response is indeed retrieved
-            console.log(data) 
-        */
+
+        //  check si le token est bien récupéré
+        //  console.log(data) 
         const token = data.body.token;
         dispatch(loginSuccess(token));
         sessionStorage.setItem("token", token);
@@ -46,7 +45,7 @@ function SignInForm() {
         }
         navigate('/user');
       } else {
-        const error = "Incorrect email/password"
+        const error = "Email/mot de passe incorrect";
         dispatch(loginFailed(error));
       }
     } catch (error) {
@@ -57,24 +56,22 @@ function SignInForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="input-wrapper">
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Nom d'utilisateur</label>
         <input
           type="text"
           id="username"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-
         />
       </div>
 
       <div className="input-wrapper">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Mot de passe</label>
         <input
           type="password"
           id="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-
         />
       </div>
 
@@ -84,13 +81,12 @@ function SignInForm() {
           id="remember-me"
           checked={rememberMe}
           onChange={(event) => setRememberMe(event.target.checked)}
-
         />
-        <label htmlFor="remember-me">Remember me</label>
+        <label htmlFor="remember-me">Se souvenir de moi</label>
       </div>
 
       <button className="sign-in-button">
-        Sign In
+        Se connecter
       </button>
       {errorMessage && <p className='error-message'>{errorMessage}</p>}
     </form>

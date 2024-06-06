@@ -6,20 +6,20 @@ import { isValidName } from "../../utils/regex.jsx";
 function Header() {
     const token = useSelector((state) => state.auth.token);
     const userData = useSelector((state) => state.user.userData);
-    /* Manages the appearance of the username modification form */
+    // gère l'apparition du formulaire de modif du nom du user
     const [display, setDisplay] = useState(true);
-    /* Get username */
+    /* obtenir le nom du user */
     const [userName, setUserName] = useState('');
-    /* Handle error message */
+    /* gère message d'erreur */
     const [errorMessage, setErrorMessage] = useState('');
 
     const dispatch = useDispatch();
 
-    /* Asynchronous username update function */
+    /* fonction async màj du nom d'utilisateur */
     const handleSubmitUsername = async (event) => {
         event.preventDefault();
         if (!isValidName(userName)) {
-            setErrorMessage("Invalid username");
+            setErrorMessage("Nom d'utilisateur invalide");
             return;
         } else {
             setErrorMessage("");
@@ -36,14 +36,11 @@ function Header() {
             if (response.ok) {
                 const data = await response.json();
                 const username = data.body.userName;
-                /* 
-                    Checking that the query response is indeed retrieved
-                    console.log(data) 
-                */
+
                 dispatch(updateUsername(username));
                 setDisplay(!display);
             } else {
-                console.log("Invalid Fields")
+                console.log("Champs invalides")
             }
 
         } catch (error) {
@@ -102,6 +99,5 @@ function Header() {
         </div>
     )
 }
-
 
 export default Header;

@@ -21,10 +21,8 @@ function User() {
           });
           if (response.ok) {
             const data = await response.json();
-            /* 
-                Checking that the query response is indeed retrieved
-                console.log(data) 
-            */
+
+            // si la réponse est ok, on récupère les données de l'utilisateur
             const userData = {
               createdAt: data.body.createdAt,
               updatedAt: data.body.updatedAt,
@@ -34,7 +32,8 @@ function User() {
               lastname: data.body.lastName,
               username: data.body.userName
             }
-            /* Return user data in redux state */
+
+            /* Retourne les données de l'utilisateur */
             dispatch(userProfile(userData));
           } else {
             console.log("error while retrieving profile");

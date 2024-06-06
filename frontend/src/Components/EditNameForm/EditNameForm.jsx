@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-
 import { modifyUserName } from "../../store/user";
-
 import { selectBaseURL, selectUserToken, selectUserFirstName, selectUserLastName } from "../../store/selectors";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import "../EditNameForm/style.css";
 
 function EditNameForm() {
@@ -25,11 +21,11 @@ function EditNameForm() {
 		event.preventDefault();
 		// check si nom / prénoms ont changés
 		if (newFirstName === userFirstName && newLastName === userLastName) {
-			setEditNameFormError("FirstName and LastName are the same as the current ones.");
+			setEditNameFormError("Le nom et le prénom n'ont pas changé");
 		}
 		// check si nom / prénoms sont vides
 		else if (newFirstName.length === 0 || newLastName.length === 0) {
-			setEditNameFormError("Inputs can't be empty");
+			setEditNameFormError("Les inputs du nom et du prénom ne peuvent pas être vides");
 		}
 		// check si nom / prénoms sont trop longs
 		else if (newFirstName.length > 0 && newLastName.length > 0) {
