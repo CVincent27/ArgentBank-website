@@ -5,7 +5,7 @@ import logo from '../../assets/argentBankLogo.webp';
 
 
 function Navbar() {
-  
+
   const isConnected = useSelector((state) => state.auth.token);
   const firstname = useSelector((state) => state.user.userData.firstname);
 
@@ -43,7 +43,7 @@ function Navbar() {
       ) : (
         <div className='not-connected'>
           <Link to='/login' >
-            <p><i className="fa-solid fa-circle-user"></i> Sign In</p>
+            <p className='main-nav-item'><i className="fa-solid fa-circle-user"></i> Sign In</p>
           </Link>
         </div>
       )}
