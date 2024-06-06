@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/actions/auth.actions';
-import logo from '../../assets/argentBankLogo.png'
+import logo from '../../assets/argentBankLogo.webp'
 
 function Navbar() {
 

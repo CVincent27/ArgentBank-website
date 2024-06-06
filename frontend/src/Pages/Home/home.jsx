@@ -1,10 +1,10 @@
 import Features from "../../Components/Features/Features";
-import Hero from "../../Components/Hero/Hero";
+import Banner from "../../Components/Banner/Banner";
 
 function Home() {
 	return (
 		<main>
-			<Hero />
+			<Banner />
 			<Features />
 		</main>
 	);

@@ -1,6 +1,6 @@
-import chat from '../../assets/icon-chat.png';
-import money from '../../assets/icon-money.png';
-import security from '../../assets/icon-security.png';
+import chat from '../../assets/icon-chat.webp';
+import money from '../../assets/icon-money.webp';
+import security from '../../assets/icon-security.webp';
 
 function Features() {
 	return (
