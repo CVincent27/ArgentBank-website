@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInService } from '../../redux/services/authService.jsx';
 import { loginFailed, loginSuccess } from '../../redux/actions/auth.actions.jsx';
@@ -11,6 +11,9 @@ function SignInForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const token = useSelector((state) => state.auth.token)
+  const error = useSelector((state) => state.auth.error)
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,26 +21,36 @@ function SignInForm() {
     event.preventDefault();
     // Gestion erreur msg
     if (!isValidEmail(email)) {
-      setErrorMessage("Invalid email adress or password");
+      setErrorMessage("Votre email est mal formaté");
       return;
     }
     if (!isValidPassword(password)) {
-      setErrorMessage("Invalid email adress or password");
+      setErrorMessage("Votre mot de passe est mal formaté");
       return;
     }
     try {
-      const token = await signInService(email, password);
-      dispatch(loginSuccess(token));
+      const data = await signInService(email, password);
+      dispatch(loginSuccess(data));
+
+    } catch (error) {
+      dispatch(loginFailed(error.message));
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
       sessionStorage.setItem("token", token);
       if (rememberMe) {
         localStorage.setItem("token", token);
       }
       navigate("/user");
-    } catch (error) {
-      console.error(error);
-      dispatch(loginFailed(error.message));
     }
-  };
+    if (error) {
+      console.log(error);
+      setErrorMessage(error);
+    }
+  }, [token, rememberMe, navigate, error]);
+
 
   return (
     <form onSubmit={handleSubmit}>

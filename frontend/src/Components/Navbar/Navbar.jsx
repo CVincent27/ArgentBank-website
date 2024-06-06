@@ -7,7 +7,7 @@ import logo from '../../assets/argentBankLogo.webp';
 function Navbar() {
 
   const isConnected = useSelector((state) => state.auth.token);
-  const firstname = useSelector((state) => state.user.userData.firstname);
+  const username = useSelector((state) => state.user.userData.username);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function Navbar() {
         <div className='connected'>
           <Link to='/user'>
             <i className='fa-solid fa-circle-user' />
-            <p>{firstname},</p>
+            <p>{username},</p>
           </Link>
           <Link to='/' onClick={logoutHandler}>
             <p>Sign out <i className='fa-solid fa-arrow-right-from-bracket' /></p>
