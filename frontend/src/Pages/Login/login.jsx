@@ -1,9 +1,13 @@
-import SignInContent from '../../Components/SignInContent/SignInContent';
+import SignInForm from "../../Components/SignInForm/SignInForm";
 
 function Login() {
 	return (
 		<main className="main-content">
-			<SignInContent />
+			<section className="sign-in-content">
+				<i className="fa fa-user-circle sign-in-icon"></i>
+				<h1>Sign In</h1>
+				<SignInForm />
+			</section>
 		</main>
 	);
 }
