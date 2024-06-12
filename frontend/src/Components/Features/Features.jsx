@@ -6,23 +6,31 @@ function Features() {
 	return (
 		<section className="features">
 			<h2 className="sr-only">Features</h2>
-			<div className="feature-item">
-				<img src={chat} alt="Chat Icon" className="feature-icon" />
-				<h3 className="feature-item-title">You are our #1 priority</h3>
-				<p>Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes.</p>
-			</div>
-			<div className="feature-item">
-				<img src={money} alt="Money Icon" className="feature-icon" />
-				<h3 className="feature-item-title">More savings means higher rates</h3>
-				<p>The more you save with us, the higher your interest rate will be!</p>
-			</div>
-			<div className="feature-item">
-				<img src={security} alt="Security Icon" className="feature-icon" />
-				<h3 className="feature-item-title">Security you can trust</h3>
-				<p>We use top of the line encryption to make sure your data and money is always safe.</p>
-			</div>
+			{/* Utilisez map pour itérer sur les données et générer dynamiquement les éléments */}
+			{featuresData.features.map((feature, index) => (
+				<div className="feature-item" key={index}>
+					{/* Utilisez des variables importées pour charger les images */}
+					<img src={getIcon(feature.icon)} alt={`${feature.title} Icon`} className="feature-icon" />
+					<h3 className="feature-item-title">{feature.title}</h3>
+					<p>{feature.description}</p>
+				</div>
+			))}
 		</section>
 	);
+}
+
+// Fonction utilitaire pour obtenir l'icône correspondante
+function getIcon(iconName) {
+	switch (iconName) {
+		case 'chat':
+			return chatIcon;
+		case 'money':
+			return moneyIcon;
+		case 'security':
+			return securityIcon;
+		default:
+			return null;
+	}
 }
 
 export default Features;
