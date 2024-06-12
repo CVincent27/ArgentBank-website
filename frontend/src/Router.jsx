@@ -6,6 +6,7 @@ import User from "./Pages/User/User";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Login from "./Pages/Login/login"
+import Error from "./Pages/Error/error";
 
 export default function Router() {
   const isConnected = useSelector((state) => state.auth.isConnected);
