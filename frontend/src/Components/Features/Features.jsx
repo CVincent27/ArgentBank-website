@@ -1,6 +1,7 @@
-import chat from '../../assets/icon-chat.webp';
-import money from '../../assets/icon-money.webp';
-import security from '../../assets/icon-security.webp';
+import chat_Icon from '../../assets/icon-chat.webp';
+import money_Icon from '../../assets/icon-money.webp';
+import security_Icon from '../../assets/icon-security.webp';
+import featuresData from '../../Components/Features/FeaturesData.json';
 
 function Features() {
 	return (
@@ -23,11 +24,11 @@ function Features() {
 function getIcon(iconName) {
 	switch (iconName) {
 		case 'chat':
-			return chatIcon;
+			return chat_Icon;
 		case 'money':
-			return moneyIcon;
+			return money_Icon;
 		case 'security':
-			return securityIcon;
+			return security_Icon;
 		default:
 			return null;
 	}
