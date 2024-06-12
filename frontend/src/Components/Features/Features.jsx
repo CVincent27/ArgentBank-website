@@ -1,6 +1,6 @@
-import chatIcon from '../../assets/icon-chat.webp';
-import moneyIcon from '../../assets/icon-money.webp';
-import securityIcon from '../../assets/icon-security.webp';
+import chatIcon from '../../assets/icon-chat-min.webp';
+import moneyIcon from '../../assets/icon-money-min.webp';
+import securityIcon from '../../assets/icon-security-min.webp';
 import featuresData from '../../Components/Features/FeaturesData.json';
 
 const iconMap = {
