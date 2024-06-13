@@ -175,7 +175,7 @@ paths:
         "200":
           description: Transaction updated successfully
           schema:
-            $ref: "#/definitions/TransactionResponse"
+            $ref: "#/definitions/UpdateTransaction"
         "401":
           description: Unauthorized
         "404":
