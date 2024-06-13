@@ -2,17 +2,12 @@ swagger: "2.0"
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: "2.0.0"
+  version: "1.0.0"
   termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
-basePath: /api/v2
+basePath: /api/v1
 schemes:
   - http
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
 paths:
   /user/login:
     post:
@@ -70,11 +65,9 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      produces:
-        - application/json
       responses:
         "200":
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: "#/definitions/ApiResponse"
         "400":
@@ -99,91 +92,100 @@ paths:
         - application/json
       responses:
         "200":
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: "#/definitions/ApiResponse"
         "400":
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/account:
+  /transactions:
     get:
       security:
         - Bearer: []
       tags:
-        - Accounts and Transactions Module
-      summary: All accounts
-      description: API for retrieving all user account
-
-      responses:
-        "200":
-          description: All accounts retrieved successfully
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/AccountResponse"
-        "401":
-          description: Unauthorized user
-        "500":
-          description: Internal Server Error
-  /account/{accountID}/transactions:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Accounts and Transactions Module
-      summary: Account transactions
-      description: API for retrieving list of transactions assiocated with an account
+        - Transaction Module
+      summary: Get all transactions
+      description: Retrieve all transactions for the logged-in user
       parameters:
-        - in: path
-          name: accountID
-          description: ID of an account
+        - name: Authorization
+          in: header
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         "200":
-          description: All transactions retrieved successfully
+          description: A list of transactions
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/TransactionsResponse"
+            type: object
+            properties:
+              transactions:
+                type: array
+                items:
+                  $ref: "#/definitions/TransactionResponse"
         "401":
-          description: Unauthorized user
-        "404":
-          description: Account not found
+          description: Unauthorized
         "500":
           description: Internal Server Error
-  /transactions/{transactionID}:
+  /transactions/{id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get a transaction
+      description: get an existing transaction
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transaction found successfully
+          schema:
+            $ref: "#/definitions/TransactionResponse"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not found
     patch:
       security:
         - Bearer: []
       tags:
-        - Accounts and Transactions Module
-      summary: Manage transaction's note and category
-      description: API for managing a note and category of a transaction
+        - Transaction Module
+      summary: Update a transaction
+      description: Update an existing transaction
       parameters:
-        - in: path
-          name: transactionID
-          description: ID of a transaction
+        - name: Authorization
+          in: header
           required: true
           type: string
+        - name: id
+          in: path
+          required: true
+          type: integer
         - in: body
-          name: transaction
-          description: New or modified transaction data
+          name: body
+          description: Updated transaction data
           required: true
           schema:
-            $ref: "#/definitions/TransactionPatch"
+            $ref: "#/definitions/UpdateTransaction"
+      produces:
+        - application/json
       responses:
         "200":
-          description: Transaction's note and category managed successfully
+          description: Transaction updated successfully
           schema:
-            $ref: "#/definitions/TransactionPatchResponse"
+            $ref: "#/definitions/TransactionResponse"
         "401":
-          description: Unauthorized user
+          description: Unauthorized
         "404":
-          description: Transaction not found
-        "500":
-          description: Internal Server Error
+          description: Not found
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 definitions:
   User:
     properties:
@@ -234,59 +236,23 @@ definitions:
     properties:
       userName:
         type: string
-  AccountResponse:
+  TransactionResponse:
     type: object
     properties:
-      accountID:
-        type: string
-        description: account ID
-      accountName:
-        type: string
-        description: account name
-      accountCurrency:
-        type: string
-        description: account currency
-      currentBalance:
-        type: number
-        description: current account balance
-        format: double
-  TransactionsResponse:
-    type: object
-    properties:
-      transactionID:
-        type: string
-        description: transaction ID
-      transactionType:
-        type: string
-        description: type of transaction
+      id:
+        type: integer
       date:
         type: string
-        format: date-time
-        description: date of transaction
-      description:
-        type: string
-        description: description of transaction
-      amount:
-        type: number
-        description: transaction amout
-      balance:
-        type: number
-        description: available balance
-        format: double
       category:
         type: string
-        description: name of the category
-  TransactionPatch:
+      amount:
+        type: number
+      note:
+        type: string
+  UpdateTransaction:
     type: object
     properties:
       note:
         type: string
-        description: Note associated with the transaction
       category:
-        type: string
-        description: Category of the transaction
-  TransactionPatchResponse:
-    type: object
-    properties:
-      message:
         type: string
