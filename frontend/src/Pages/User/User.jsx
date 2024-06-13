@@ -33,7 +33,7 @@ function User() {
               username: data.body.userName
             }
 
-            /* Retourne les données de l'utilisateur */
+            //  Retourne les données de l'utilisateur 
             dispatch(userProfile(userData));
           } else {
             console.log("error while retrieving profile");

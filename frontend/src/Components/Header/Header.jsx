@@ -9,14 +9,14 @@ function Header() {
     const userData = useSelector((state) => state.user.userData);
     // gère l'apparition du formulaire de modif du nom du user
     const [display, setDisplay] = useState(true);
-    /* obtenir le nom du user */
+    //  obtenir le nom du user 
     const [userName, setUserName] = useState('');
-    /* gère message d'erreur */
+    //  gère message d'erreur 
     const [errorMessage, setErrorMessage] = useState('');
 
     const dispatch = useDispatch();
 
-    /* fonction async màj du nom d'utilisateur */
+    //  fonction async màj du nom d'utilisateur 
     const handleSubmitUsername = async (event) => {
         event.preventDefault();
         if (!isValidName(userName)) {
