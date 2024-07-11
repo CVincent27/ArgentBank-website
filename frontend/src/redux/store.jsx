@@ -7,9 +7,18 @@ const rootReducer = combineReducers({
     user: userReducer
 })
 
+const preloadedState = {
+    auth: {
+        isConnected: !!localStorage.getItem('token'),
+        token: localStorage.getItem('token'),
+    },
+    user: {}
+};
+
 const store = configureStore({
     reducer: rootReducer,
+    preloadedState,
     devTools: true
 })
 
-export default store
+export default store;

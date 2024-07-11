@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/auth.actions';
 import logo from '../../assets/argentBankLogo-min.webp';
 
-
 function Navbar() {
-
   const isConnected = useSelector((state) => state.auth.token);
-  const username = useSelector((state) => state.user.userData.username);
+  const userData = useSelector((state) => state.user.userData);
+  const username = userData?.username || 'User';
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -7,10 +7,14 @@ import { updateUsernameService } from "../../redux/services/userService.jsx";
 function Header() {
   const token = useSelector((state) => state.auth.token);
   const userData = useSelector((state) => state.user.userData);
+  const firstname = userData?.firstname || '';
+  const lastname = userData?.lastname || '';
+  const username = userData?.username || '';
+
   // gère l'apparition du formulaire de modif du nom du user
   const [display, setDisplay] = useState(true);
   //  obtenir le nom du user
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState(username);
   //  gère message d'erreur
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -26,8 +30,8 @@ function Header() {
       setErrorMessage("");
     }
     try {
-      const username = await updateUsernameService(token, userName);
-      dispatch(updateUsername(username));
+      const newUsername = await updateUsernameService(token, userName);
+      dispatch(updateUsername(newUsername));
       setDisplay(!display);
     } catch (error) {
       console.error(error);
@@ -41,7 +45,7 @@ function Header() {
           <h1>
             Welcome back
             <br />
-            {userData.firstname} {userData.lastname}
+            {firstname} {lastname}
           </h1>
 
           <button className="edit-button" onClick={() => setDisplay(!display)}>
@@ -57,7 +61,7 @@ function Header() {
               <input
                 type="text"
                 id="username"
-                defaultValue={userData.username}
+                defaultValue={username}
                 onChange={(event) => setUserName(event.target.value)}
               />
             </div>
@@ -66,7 +70,7 @@ function Header() {
               <input
                 type="text"
                 id="firstname"
-                defaultValue={userData.firstname}
+                defaultValue={firstname}
                 disabled={true}
               />
             </div>
@@ -75,7 +79,7 @@ function Header() {
               <input
                 type="text"
                 id="lastname"
-                defaultValue={userData.lastname}
+                defaultValue={lastname}
                 disabled={true}
               />
             </div>
