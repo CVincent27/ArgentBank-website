@@ -262,6 +262,13 @@ definitions:
         type: number
       note:
         type: string
+      balance:
+        type: number
+        description: The balance of the account
+        default: 0
+      transactionType:
+        type: string
+        description: The type of the transaction
   UpdateTransaction:
     type: object
     properties:
