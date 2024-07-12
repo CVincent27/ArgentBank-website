@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUsername } from "../../redux/actions/users.actions.jsx";
-import { isValidName } from "../../utils/regex.jsx";
+import { isValidName } from "../../utils/Regex.jsx";
 import { updateUsernameService } from "../../redux/services/userService.jsx";
 
 function Header() {

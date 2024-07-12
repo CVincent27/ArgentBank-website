@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInService } from '../../redux/services/authService.jsx';
 import { loginFailed, loginSuccess } from '../../redux/actions/auth.actions.jsx';
-import { isValidEmail, isValidPassword } from '../../utils/regex.jsx';
+import { isValidEmail, isValidPassword } from '../../utils/Regex.jsx';
 
 function SignInForm() {
   const [email, setEmail] = useState("");
